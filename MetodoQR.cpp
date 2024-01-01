@@ -15,6 +15,7 @@ MetodoQR::MetodoQR(int N, double lambda)
 	//N y se ignora el índice 0.
 	//Although b_n actually has one element less, in order to ease indexing, b_n has size N but we ignore the first element.
 	b_n = new double[_N];
+	matrix = new double[_N + 2 * (N - 1)];
 }
 
 //Destructor
@@ -157,6 +158,18 @@ void MetodoQR::Solve()
 
 		a[n] = c_n[n] * z[n];
 	}
+
+	int matrixLength = _N + 2 * (_N - 1);
+	matrix[0] = autovalores[0];
+	matrix[1] = b_n[1];
+	matrix[matrixLength - 1] = autovalores[_N - 1];
+	matrix[matrixLength - 2] = b_n[_N - 1];
+
+	for (int i = 3; i < matrixLength - 2; i + 3) {
+		matrix[i - 1] = b_n[i - 1];
+		matrix[i] = autovalores[i - 2];
+		matrix[i + 1] = b_n[i - 2];
+	}
 }
 
 //Para devolver los autovalores.
@@ -164,6 +177,11 @@ void MetodoQR::Solve()
 double* MetodoQR::GetSolution()
 {
 	return autovalores;
+}
+
+double* MetodoQR::GetMatrix()
+{
+	return matrix;
 }
 
 //Para escribir la solución en un CSV.

@@ -5,3 +5,4 @@
 #include <vector>
 #include <fstream>
 #include "MetodoQR.h"
+#include "Solver.h"

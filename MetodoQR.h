@@ -7,11 +7,13 @@ class MetodoQR
         double _lambda;
         double* autovalores;
         double* b_n;
+        double* matrix;
 
     public:
         MetodoQR(int N, double lambda);
         ~MetodoQR();
         void Solve();
         double* GetSolution();
+        double* GetMatrix();
         void WriteSolution();
 };
