@@ -5,13 +5,13 @@ Implementación del método QR para la resolución de EDP parabólicas e hiperbólica
 
 Para compilar en la línea de comandos:
 
-`cmake CMakeList.txt` \
-`cmake --build . --target EcuacionParabolicaHiperbolica`
+`cmake` \
+`cmake --build .`
 
 Si se usa un IDE tipo Visual Studio, abre la carpeta como un proyecto y compila como cualquier otro proyecto. Asegúrate de que tienes la extensión para CMake.
 
 
-`EcuacionParabolicaHiperbolica`
+`EcuacionParabolicaHiperbolica boundary_left=0.0 boundary_right=0.0 N=10 T=10.0 L=1.0`
 
 ## Estructura de los archivos.
 - EcuacionParabolicaHiperbolica contiene el main y las comprobaciones de los argumentos.
@@ -22,13 +22,13 @@ Implementation of QRfor solving parabolical and hyperbolical PDE. Builds using c
 
 To build using command line:
 
-`cmake CMakeList.txt` \
-`cmake --build . --target EcuacionParabolicaHiperbolica`
+`cmake` \
+`cmake --build .`
 
 In case you use and IDE like Visual Studio, open the folder as a project and build it like any other project. Ensure that your IDE has the extensions for CMake.
 
 
-`EcuacionParabolicaHiperbolica`
+`EcuacionParabolicaHiperbolica  boundary_left=0.0 boundary_right=0.0 N=10 T=10.0 L=1.0`
 
 
 ## Folder structure.

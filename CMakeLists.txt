@@ -14,7 +14,7 @@ project ("EcuacionParabolicaHiperbolica")
 # Add source to this project's executable.
 file(GLOB EcuacionParabolicaHiperbolica_sources ./**.cpp)
 set(EcuacionParabolicaHiperbolica ${EcuacionParabolicaHiperbolica_sources})
-add_executable (EcuacionParabolicaHiperbolica ${EcuacionParabolicaHiperbolica_sources})
+add_executable (EcuacionParabolicaHiperbolica ${EcuacionParabolicaHiperbolica_sources} "Solver.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET EcuacionParabolicaHiperbolica PROPERTY CXX_STANDARD 20)

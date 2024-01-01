@@ -6,7 +6,7 @@
 
 using namespace std;
 
-dobule* defineN(double L, double boundaryLeft, double boundaryRight, int N)
+double* defineN(double L, double boundaryLeft, double boundaryRight, int N)
 {
 	double* n = new double[N];
 	double h = L / N;
@@ -24,13 +24,17 @@ dobule* defineN(double L, double boundaryLeft, double boundaryRight, int N)
 	return n;
 }
 
-void solve(double* A, double* n, double T, double L, double boundaryLeft, double boundaryRight, int N)
+int solve(double* A, double* n, double T, double lambda, double L, double boundaryLeft, double boundaryRight, int N)
 {
 	double h = L / N;
 	double t = 0.0;
 	//Para asegurar la convergencia, el paso de tiempo tiene que cumplir la relación k/(h^2)<=1/2.
 	//To ensure convergence, time step must satisfy the relationship k/(h^2)<=1/2.
-	double k = h * h / 2;
+	double k = h * h * lambda;
+	int maxIterations = 10000;
+	int iteration = 0;
+
+	writeResults(n, t, h, k, N, L);
 
 	while (t < T)
 	{
@@ -40,8 +44,13 @@ void solve(double* A, double* n, double T, double L, double boundaryLeft, double
 		}
 		t += k;
 
-		writeResults(n, t, h, k, L);
+		writeResults(n, t, h, k, N, L);
+
+		if (iteration > maxIterations) return 1;
+		iteration++;
 	}
+
+	return 0;
 }
 
 void writeResults(double* n, double t, double h, double k, int N, double L)

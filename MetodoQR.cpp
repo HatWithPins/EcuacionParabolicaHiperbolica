@@ -165,7 +165,7 @@ void MetodoQR::Solve()
 	matrix[matrixLength - 1] = autovalores[_N - 1];
 	matrix[matrixLength - 2] = b_n[_N - 1];
 
-	for (int i = 3; i < matrixLength - 2; i + 3) {
+	for (int i = 3; i < matrixLength - 2; i += 3) {
 		matrix[i - 1] = b_n[i - 1];
 		matrix[i] = autovalores[i - 2];
 		matrix[i + 1] = b_n[i - 2];
