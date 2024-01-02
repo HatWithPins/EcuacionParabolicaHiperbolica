@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	double lambda = 0.4;
+	double lambda = 0.3;
 
 	return steps(lambda, boundaryLeft, boundaryRight, N, T, L);
 }
