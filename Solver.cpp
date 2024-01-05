@@ -8,7 +8,7 @@ using namespace std;
 
 double* defineN(double L, double boundaryLeft, double boundaryRight, int N)
 {
-	double* n = new double[N+1];
+	double* n = new double[N + 1];
 	double h = L / N;
 	double x;
 
@@ -25,28 +25,55 @@ double* defineN(double L, double boundaryLeft, double boundaryRight, int N)
 	return n;
 }
 
-int solve(double* A, double* n, double T, double lambda, double L, double boundaryLeft, double boundaryRight, int N)
+double* defineA(double lambda, int N)
+{
+	int matrixLength = N + 2 * (N - 1);
+	double* matrix = new double[matrixLength];
+
+	matrix[0] = 1 - 2 * lambda;
+	matrix[1] = lambda;
+	matrix[matrixLength - 1] = 1 - 2 * lambda;
+	matrix[matrixLength - 2] = lambda;
+
+	for (int i = 3; i < matrixLength - 2; i += 3) {
+		matrix[i - 1] = lambda;
+		matrix[i] = 1 - 2 * lambda;
+		matrix[i + 1] = lambda;
+	}
+
+	return matrix;
+}
+
+int solve(double* A, double* n_0, double T, double lambda, double L, double boundaryLeft, double boundaryRight, int N)
 {
 	double h = L / N;
 	double t = 0.0;
+	double* n_1 = new double[N + 1];
+	n_1[0] = boundaryLeft;
+	n_1[N] = boundaryRight;
 	//Para asegurar la convergencia, el paso de tiempo tiene que cumplir la relación k/(h^2)<=1/2.
 	//To ensure convergence, time step must satisfy the relationship k/(h^2)<=1/2.
 	double k = h * h * lambda;
 	int maxIterations = 10000;
 	int iteration = 0;
+	int matrixLength = N + 2 * (N - 1);
 
-	writeResults(n, t, h, k, N, L);
+	writeResults(n_0, t, h, k, N, L);
 
 	while (t < T)
 	{
-		n[1] = A[0] * n[0] + A[1] * n[1];
 		for (int i = 1; i < N; i++)
 		{
-			n[i] = A[i * 3] * n[i] + A[i * 3 - 1] * n[i - 1] + A[i * 3 + 1] * n[i + 1];
+			n_1[i] = A[i * 3] * n_0[i] + A[i * 3 - 1] * n_0[i - 1] + A[i * 3 + 1] * n_0[i + 1];
 		}
 		t += k;
 
-		writeResults(n, t, h, k, N, L);
+		writeResults(n_1, t, h, k, N, L);
+
+		for (int i = 0; i < N + 1; i++)
+		{
+			n_0[i] = n_1[i];
+		}
 
 		if (iteration > maxIterations) return 1;
 		iteration++;

@@ -4,10 +4,7 @@ using namespace std;
 
 int steps(double lambda, double boundaryLeft, double boundaryRight, int N, double T, double L)
 {
-	MetodoQR metodoQR(N, lambda);
-	metodoQR.Solve();
-
-	double* A = metodoQR.GetMatrix();
+	double* A = defineA(lambda, N);
 	double* n = defineN(L, boundaryLeft, boundaryRight, N);
 
 	return solve(A, n, T, lambda, L, boundaryLeft, boundaryRight, N);
